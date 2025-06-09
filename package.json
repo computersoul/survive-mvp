@@ -1,0 +1,15 @@
+{
+  "name": "survive-mvp",
+  "workspaces": ["frontend", "backend"],
+  "scripts": {
+    "install:all": "yarn install && cd bot && pip install -r requirements.txt",
+    "setup:env": "cp .env.example .env || true",
+    "start": "concurrently \"yarn start:frontend\" \"yarn start:backend\" \"yarn start:bot\"",
+    "start:frontend": "cd frontend && yarn dev",
+    "start:backend": "cd backend && node server.js",
+    "start:bot": "cd bot && python bot.py"
+  },
+  "devDependencies": {
+    "concurrently": ">=8.0.0"
+  }
+}

@@ -35,17 +35,17 @@ survive-mvp/
    cd survive-mvp
    ```
 2. **Configure Environment**:
-   - Copy .env.example to .env and set variables (e.g., DB_USER, DB_PASSWORD, TELEGRAM_BOT_TOKEN).
+   Copy .env.example to .env and set variables (e.g., DB_USER, DB_PASSWORD, TELEGRAM_BOT_TOKEN).
 3. **Build and run containers**:
    ```
    docker compose build
-    docker compose up -d
+   docker compose up -d
    ```
 4. **Apply Migrations**:
    ```
    docker-compose up migrate
    ```
 5. **Open in browser**
-   Frontend: http://localhost:5173
-   Backend API: http://localhost:3000
+   - Frontend: [http://localhost:5173](http://localhost:5173)
+   - Backend API: [http://localhost:3000](http://localhost:3000)
 

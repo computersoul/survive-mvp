@@ -1,0 +1,67 @@
+version: "3"
+
+services:
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    command: sh -c "cd web/backend && npm start"
+    ports:
+      - "3000:3000"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/web/backend/node_modules
+    depends_on:
+      - db
+
+  frontend:
+    build: .
+    command: sh -c "cd web/frontend && npm run dev"
+    ports:
+      - "5173:5173"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/web/frontend/node_modules
+    depends_on:
+      - backend
+
+  bot:
+    build: .
+    command: sh -c "cd bot && python bot.py"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/bot/.venv
+    depends_on:
+      - backend
+
+  migrate:
+    build: .
+    command: sh -c "cd web/backend && npm run migrate"
+    env_file:
+      - .env
+    volumes:
+      - .:/app
+      - /app/node_modules
+      - /app/web/backend/node_modules
+    depends_on:
+      - db
+
+volumes:
+  pgdata:

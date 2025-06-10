@@ -1,6 +1,7 @@
 # Survive-MVP Documentation
 
 > 🚧 **Work in Progress** 🚧
+> 
 > Survive-MVP is under active development, so you might encounter bugs or unfinished features.
 
 ## Project Overview
